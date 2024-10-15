@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
-
 
     <TextView
         android:id="@+id/textView"
@@ -15,40 +15,58 @@
         android:layout_height="wrap_content"
         android:text="Agregar Producto"
         android:textAlignment="center"
-        android:textSize="34sp"
-        android:textStyle="bold|italic" />
+        android:textSize="36sp"
+        android:textStyle="bold|italic"
+        android:textColor="@android:color/holo_blue_dark"
+        android:paddingBottom="10dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre" />
+        android:text="Nombre"
+        android:textSize="18sp"
+        android:textColor="@android:color/darker_gray" />
 
     <EditText
         android:id="@+id/eTNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:hint="Introduce el nombre del producto"
+        android:inputType="textPersonName"
+        android:background="@android:drawable/edit_text"
+        android:padding="10dp"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Codigo" />
+        android:text="Código"
+        android:textSize="18sp"
+        android:textColor="@android:color/darker_gray"
+        android:paddingTop="15dp" />
 
     <EditText
         android:id="@+id/eTEditorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:hint="Introduce el código del producto"
+        android:inputType="text"
+        android:background="@android:drawable/edit_text"
+        android:padding="10dp"
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/bTAgregar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar" />
+        android:text="Agregar"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_green_dark"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -57,17 +75,16 @@
         android:text="Listado de Productos"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic"
+        android:textColor="@android:color/holo_blue_dark"
+        android:paddingTop="20dp" />
 
     <ListView
         android:id="@+id/lvListadoLibros"
         android:layout_width="match_parent"
-        android:layout_height="358dp" />
-
-    <Button
-        android:id="@+id/btclientes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ir a Clientes" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="1dp"
+        android:divider="@android:color/darker_gray"/>
 
 </LinearLayout>

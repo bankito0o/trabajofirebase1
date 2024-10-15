@@ -21,77 +21,78 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.example.trabajofirebase1.Clases.Libro;
-
+import com.example.trabajofirebase1.Clases.Producto;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Libro> ListLibro = new ArrayList<Libro>();
-    private List<String> ListLibroNombre = new ArrayList();
-    ArrayAdapter<Libro> arrayAdapterLibro;
-    ArrayAdapter<String> arrayAdapterString;
+    private List<Producto> ListProducto = new ArrayList<>();
+    private List<String> ListProductoNombre = new ArrayList<>();
+    private ArrayAdapter<String> arrayAdapterString;
 
+    private EditText eTNombre, eTCodigo;
+    private Button bTAgregar;
+    private ListView lvListadoProductos;
 
-    EditText eTNombre,eTEditorial;
-    Button bTBoton, btEliminar;
-    ListView lvListadoLibros;
-
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        eTNombre=findViewById(R.id.eTNombre);
-        eTEditorial=findViewById(R.id.eTEditorial);
-        bTBoton=findViewById(R.id.bTAgregar);
-        lvListadoLibros=findViewById(R.id.lvListadoLibros);
+        eTNombre = findViewById(R.id.eTNombre);
+        eTCodigo = findViewById(R.id.eTEditorial);
+        bTAgregar = findViewById(R.id.bTAgregar);
+        lvListadoProductos = findViewById(R.id.lvListadoLibros);
+
         inicializarFireBase();
         listarDatos();
 
-        bTBoton.setOnClickListener(new View.OnClickListener() {
+        bTAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Libro libro = new Libro();
-                //libro.setIdAutor("11111");
-                libro.setIdAutor(UUID.randomUUID().toString());
-                libro.setNombre(eTNombre.getText().toString());
-                libro.setEstado(eTEditorial.getText().toString());
-                databaseReference.child("Libro").child(libro.getIdAutor()).setValue(libro);
-
-
+                String nombre = eTNombre.getText().toString();
+                String codigo = eTCodigo.getText().toString();
+                if (!nombre.isEmpty() && !codigo.isEmpty()) {
+                    Producto producto = new Producto();
+                    producto.setIdProducto(UUID.randomUUID().toString());
+                    producto.setNombre(nombre);
+                    producto.setCodigo(codigo);
+                    databaseReference.child("Producto").child(producto.getIdProducto()).setValue(producto);
+                    eTNombre.setText("");
+                    eTCodigo.setText("");
+                }
             }
         });
-
-
     }
+
     private void listarDatos() {
-        databaseReference.child("Libro").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Producto").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ListLibro.clear();
-                for (DataSnapshot objs : snapshot.getChildren()){
-                    Libro li =objs.getValue(Libro.class);
-                    ListLibro.add(li);
-                    ListLibroNombre.add(""+li.getNombre()+" "+li.getEstado());
-                    arrayAdapterString =new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_expandable_list_item_1,ListLibroNombre);
-                    lvListadoLibros.setAdapter(arrayAdapterString);
+                ListProducto.clear();
+                ListProductoNombre.clear();
+                for (DataSnapshot objs : snapshot.getChildren()) {
+                    Producto p = objs.getValue(Producto.class);
+                    if (p != null) {
+                        ListProducto.add(p);
+                        ListProductoNombre.add(p.getNombre() + " - " + p.getCodigo());
+                    }
                 }
+                arrayAdapterString = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, ListProductoNombre);
+                lvListadoProductos.setAdapter(arrayAdapterString);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
 
-
-    private void inicializarFireBase(){
+    private void inicializarFireBase() {
         FirebaseApp.initializeApp(this);
-        firebaseDatabase =FirebaseDatabase.getInstance();
-        databaseReference =firebaseDatabase.getReference();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 }
+
