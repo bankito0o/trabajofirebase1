@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "932519666986",
+    "project_id": "trabajofirebase1",
+    "storage_bucket": "trabajofirebase1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932519666986:android:45c08a30ef06fbc551ea53",
+        "android_client_info": {
+          "package_name": "com.example.trabajofirebase1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNRT6ckxFIUmMSTajU8wMbHq9qFAFgc8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
